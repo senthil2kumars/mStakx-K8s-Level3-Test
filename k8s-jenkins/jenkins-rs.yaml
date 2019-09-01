@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "4"
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: jenkins
+    pod-template-hash: 5746c89985
+  name: jenkins-5746c89985
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: jenkins
+    uid: 609da3f1-5fd7-48eb-ad5e-a148766efec3
+  selfLink: /apis/apps/v1/namespaces/jenkins/replicasets/jenkins-5746c89985
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+      pod-template-hash: 5746c89985
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: jenkins
+        pod-template-hash: 5746c89985
+    spec:
+      containers:
+      - image: jenkins:latest
+        imagePullPolicy: Always
+        name: jenkins
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/jenkins_home
+          name: jenkins-home
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - args:
+        - chown 1000:1000 /var/jenkins_home;
+        command:
+        - /bin/sh
+        - -c
+        image: alpine:latest
+        imagePullPolicy: Always
+        name: permissionsfix
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/jenkins_home
+          name: jenkins-home
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: jenkins-home
+        persistentVolumeClaim:
+          claimName: jenkins-pv-claim
+status:
+  replicas: 0
