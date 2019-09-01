@@ -1,0 +1,13 @@
+[package]
+name = "trow-protobuf"
+version = "0.1.0"
+authors = ["Adrian Mouat <adrian.mouat@container-solutions.com", "Hamish Hutchings <hamish.hutchings@container-solutions.com>"]
+build = "build.rs"
+
+[dependencies]
+grpcio = "=0.2.3"
+protobuf = "=1.4.5"
+futures = "^0.1"
+
+[build-dependencies]
+protoc-grpcio = "=0.1.1"

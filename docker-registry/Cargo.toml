@@ -1,0 +1,54 @@
+[package]
+name = "trow"
+version = "0.1.0"
+authors = ["Adrian Mouat <adrian.mouat@container-solutions.com>", "Hamish Hutchings <hamish.hutchings@container-solutions.com>"]
+
+[dependencies]
+rust-crypto = "^0.2"
+jwt = "^0.4"
+frank_jwt = "^3.1"
+rust-argon2 = "^0.4.0"
+rustc-serialize = "^0.3"
+
+rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "v0.4", features = ["tls"] }
+rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket", branch = "v0.4" }
+
+serde = "^1.0"
+serde_json = "^1.0"
+serde_derive = "^1.0"
+uuid = { version = "^0.5", features = ["v4", "rustc-serialize"] }
+log = "^0.3"
+env_logger = "^0.4"
+ctrlc = { version = "^3.0", features = ["termination"] }
+hostname = "^0.1"
+display_derive = "^0.0"
+
+grpcio = "=0.2.3"
+futures = "^0.1"
+protobuf = "=1.4.5"
+
+clap = "~2.29"
+
+orset = "^0.2"
+
+failure = "^0.1"
+failure_derive = "^0.1"
+
+trow-protobuf = { path = "./lib/protobuf" }
+trow-server = { path = "./lib/server" }
+
+base64 = "0.10.0"
+data-encoding = "2.1.2"
+#This is a rocket dependency, but we need a newer version with the p>q bugfix
+ring ="^0.13"
+chrono = "^0.4"
+
+[build-dependencies]
+
+[dev-dependencies]
+quickcheck = "^0.6"
+assert_cli = "^0.5"
+environment = "^0.1"
+hyper = "^0.11"
+rand = "^0.4"
+reqwest = "^0.9"

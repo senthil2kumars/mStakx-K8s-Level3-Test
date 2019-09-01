@@ -1,0 +1,20 @@
+language: rust
+rust:
+  - nightly
+before_script:
+  - cd install/self-cert && ./make-certs.sh && cd ../.. 
+  - mkdir certs && cp install/self-cert/ca.crt ./certs/ 
+  - cp install/self-cert/domain.key ./certs/
+  - cargo update
+  - mkdir protoc && cd protoc 
+  - curl -o protoc.zip -sSL https://github.com/google/protobuf/releases/download/v3.5.1/protoc-3.5.1-linux-x86_64.zip && unzip protoc.zip 
+  - export PATH=$PATH:$PWD/bin/
+addons:
+  hosts:
+    - trow.test
+notifications:
+  slack:
+    rooms:
+      secure: fETDT1QQGUjprGPWOanI9msQJtX9a2XTfW2E+13NCinXvigz2830VfdU09WtPhLMMVaRJgUYvRnyUbzyH+9KWCWMuXritzAKtqRNMfKkp5zbXGQyKc7yTDzLYZLq3VZzOsGEYRbxM1+yU0dmVRVqFca0hm9SE+V6+2Ry4KT+tTGZYvGbHJ1JmUd4ixJvFS5ziD4zrca0Ne1KvWDyMumsfUZCW0wphMZsuve95/WUx1WJINh83qevzijWV7Y+00fP2idY3m0eSVZJTwvTr519D9XKYSsDEPf7qvXFCiY7R7d6YrryJ5oRGef1+d+aJqsXjduFnagHLoPqXx/EzlRVmZ1hddGElTOVNZ4AVea4icZQr2uwLyPxMoyoOkaOam9freTkw9ng54NsXVBgcc4zBXdytO3adaT+ULeDtDCDgkjpEHM0kOWUFRFWtkb+leBjk9bgU9E0ZEkuvEzP20BOApFeO7k4PSEx3zSMH5l73D6y04VtmhWSv0AkxiIagERiBxBLGGHAxmFUurVYgY0Najrpqvz2zIMltvJDmLNyzv5d1r/QQpHSt9frZgF8lcR6c7NLf4/7bz8CHknjPKfOSnTaQCDjnKc6K4EBLoELpgScmacI+b3gPlqUbR9Dm12Y+vSYzEllBK6pGhUDkhXUeRThU2WA5nkI2BaQ2gFW18c=
+    on_success: change
+    on_failure: always
