@@ -25,7 +25,7 @@ display_derive = "^0.0"
 
 grpcio = "=0.2.3"
 futures = "^0.1"
-protobuf = "=1.4.5"
+protobuf = "=2.6.0"
 
 clap = "~2.29"
 
