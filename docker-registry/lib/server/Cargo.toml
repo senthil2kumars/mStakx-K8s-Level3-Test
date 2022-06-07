@@ -10,7 +10,7 @@ failure = "^0.1"
 failure_derive = "^0.1"
 #really want to upadte and add features = secure to below, but it breaks stuff
 grpcio = { version = "=0.2.3"}
-protobuf = "=1.4.5"
+protobuf = "=2.6.0"
 rust-crypto = "^0.2"
 rustc-serialize = "^0.3"
 
